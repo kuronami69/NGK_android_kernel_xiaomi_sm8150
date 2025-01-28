@@ -34,7 +34,7 @@ jobs:
       with:
         arch: arm64
         compiler: clang  # Specify that you're using Clang as the compiler
-        defconfig: <your_defconfig>  # Replace with your actual defconfig
+        defconfig: vayu_defconfig # Replace with your actual defconfig
         image: Image.gz-dtb
 
     - name: List Output Directory
