@@ -14,15 +14,27 @@ jobs:
       run: |
         curl -LSs "https://raw.githubusercontent.com/kuronami69/MemKernel/main/kernel/setup.sh" | bash -s M
 
-    - name: Android kernel build
+    - name: Install Clang
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y clang lld
+
+    - name: Configure Kernel
+      run: |
+        make <your_defconfig> # Replace with your actual defconfig
+        make oldconfig
+
+    - name: Android kernel build with Clang
       uses: lemniskett/android-kernel-actions@master
       id: build
       env:
         NAME: Loganysl
+        CC: clang
+        LD: ld.lld  # Use the LLVM linker
       with:
         arch: arm64
-        compiler: gcc/12 # Make sure to specify the correct compiler version here
-        defconfig: vayu_defconfig   # Make sure to specify the correct defconfig here
+        compiler: clang  # Specify that you're using Clang as the compiler
+        defconfig: <your_defconfig>  # Replace with your actual defconfig
         image: Image.gz-dtb
 
     - name: List Output Directory
