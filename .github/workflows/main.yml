@@ -21,7 +21,7 @@ jobs:
 
     - name: Configure Kernel
       run: |
-        make <your_defconfig> # Replace with your actual defconfig
+        make vayu_defconfig  # Replace with your actual defconfig
         make oldconfig
 
     - name: Android kernel build with Clang
@@ -34,7 +34,7 @@ jobs:
       with:
         arch: arm64
         compiler: clang  # Specify that you're using Clang as the compiler
-        defconfig: vayu_defconfig # Replace with your actual defconfig
+        defconfig: vayu_defconfig  # Replace with your actual defconfig
         image: Image.gz-dtb
 
     - name: List Output Directory
@@ -47,5 +47,5 @@ jobs:
       with:
         name: kernel-module
         path: |
-          ${{ steps.build.outputs.outfile }} # Adjust this if necessary based on your build outputs
+          ./out/Image.gz-dtb  # Adjust this if necessary based on your build outputs
           ./out/drivers/memkernel/memkernel.ko
