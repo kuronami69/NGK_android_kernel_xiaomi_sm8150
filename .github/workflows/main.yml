@@ -21,7 +21,7 @@ jobs:
 
     - name: Configure Kernel
       run: |
-        make vayu_defconfig  # Replace with your actual defconfig
+        make vayu_defconfig  # This should be your actual ARM64 defconfig
         make oldconfig
 
     - name: Android kernel build with Clang
@@ -32,9 +32,9 @@ jobs:
         CC: clang
         LD: ld.lld  # Use the LLVM linker
       with:
-        arch: arm64
+        arch: arm64  # Ensure the architecture is set to arm64
         compiler: clang  # Specify that you're using Clang as the compiler
-        defconfig: vayu_defconfig  # Replace with your actual defconfig
+        defconfig: vayu_defconfig  # This should match your ARM64 defconfig
         image: Image.gz-dtb
 
     - name: List Output Directory
